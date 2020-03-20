@@ -134,7 +134,10 @@
     margin: 0;
 }
 .city-suggest-li {
-    list-style: none;
-    padding: 5px 9px 5px 15px;
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    padding-left: 25px;
     border-bottom: 1px solid #e3e6e9;
+    margin-left: 15px;
 }
