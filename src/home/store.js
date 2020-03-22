@@ -4,7 +4,7 @@ import {
   applyMiddleware
 } from 'redux'
 import thunk from 'redux-thunk'
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './reducers'
 
 export default createStore(
@@ -20,5 +20,5 @@ export default createStore(
     isDepartDateSelectorShow:false, // 日期选择浮层是否显示
     highSpeed:false, // 只显示高铁或动车
   },
-  applyMiddleware(thunk)
+  composeWithDevTools(applyMiddleware(thunk))
 )
