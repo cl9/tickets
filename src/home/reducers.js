@@ -47,7 +47,7 @@ export default {
                 return state
         }
     },
-    departDate(state = Date.now(),action){
+    departDate(state = new Date(),action){
         const { type, payload } = action
         switch(type){
             case ACTION_SET_DEPART_DATE:

@@ -2,25 +2,20 @@ import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import './index.css'
 import dayjs from 'dayjs'
-import dayOfYear from 'dayjs/plugin/dayOfYear'
-dayjs.extend(dayOfYear)
+import {
+  formatDayStr
+} from '../../common/utils/date-util'
 
 function DepartDate(props) {
   const { time, showDateSelector } = props
 
   const formatTime = useMemo(() => {
     return dayjs(time).format('MM-DD')
-  }, [])
+  }, [time])
 
   const formatWeek = useMemo(() => {
-    let dayDur = dayjs(Date.now()).dayOfYear() - dayjs(time).dayOfYear()
-    console.log('dayDur' + dayDur)
-    if (dayDur >= 0 && dayDur <= 2) {
-      // 计算今天明天后天
-      return ['今天', '明天', '后天'][dayDur]
-    }
-    return '周' + ['日', '一', '二', '三', '四', '五', '六'][dayjs(time).day()]
-  })
+    return formatDayStr(time)
+  }, [time])
 
   return (
     <div className="depart-date" onClick={showDateSelector}>
@@ -31,6 +26,9 @@ function DepartDate(props) {
   )
 }
 
-DepartDate.propTypes = {}
+DepartDate.propTypes = {
+  time: PropTypes.object.isRequired,
+  showDateSelector: PropTypes.func.isRequired
+}
 
 export default DepartDate

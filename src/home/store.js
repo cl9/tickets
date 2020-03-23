@@ -16,7 +16,7 @@ export default createStore(
     cityData:null, // 城市数据
     isLoadingCityData: false,
     isCurrentFromSelect:true, // 是否是出发城市触发的城市选择浮层
-    departDate:Date.now(), // 选择的出发日期
+    departDate:new Date(), // 选择的出发日期
     isDepartDateSelectorShow:false, // 日期选择浮层是否显示
     highSpeed:false, // 只显示高铁或动车
   },

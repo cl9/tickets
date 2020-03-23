@@ -16,7 +16,7 @@ function CitySelector(props) {
     }
 
     fetchCityList()
-  }, [show, isLoading, cityData])
+  }, [show, isLoading, cityData, fetchCityList])
 
   const renderCityList = () => {
     if (isLoading) {

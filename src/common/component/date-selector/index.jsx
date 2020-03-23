@@ -5,6 +5,7 @@ import Header from '../header'
 import Month from './month'
 import classnames from 'classnames'
 import {
+  getStartOfMonth,
   getMonth
 } from '../../utils/date-util'
 
@@ -14,19 +15,17 @@ function DateSelector(props) {
   const months = []
   const today = Date.now()
   for (let i = 0; i < 4; i++) {
-    months.push(getMonth(today,i))
+    months.push(getStartOfMonth(today,i))
   }
-
-  console.log(months)
 
   return (
     <div className={classnames('date-selector',{hidden: !show})}>
       <Header title={'日期选择'} onBack={onBack}/>
       <div className="date-selector-tables">
-        {months.map(month => {
+        {months.map(startOfMonth => {
           return <Month 
-                    key={month}
-                    month={month} 
+                    key={getMonth(startOfMonth)}
+                    startOfMonth={startOfMonth} 
                     onSelect={onSelect}/>
         })}
       </div>

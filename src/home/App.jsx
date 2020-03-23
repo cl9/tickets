@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useEffect } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import './App.css'
 import Header from '../common/component/header'
 import Journey from './journey'
@@ -15,9 +15,14 @@ import {
   hideCitySelector,
   setSelectedCity,
   showDateSelector,
-  hideDateSelector
+  hideDateSelector,
+  setDepartDate,
+  toggleHighSpeed
 } from './actions'
 import { bindActionCreators } from 'redux'
+import {
+  isBeforeNow
+} from '../common/utils/date-util'
 
 function App(props) {
   const {
@@ -28,6 +33,7 @@ function App(props) {
     isDepartDateSelectorShow,
     cityData,
     departDate,
+    highSpeed,
     dispatch
   } = props
 
@@ -41,7 +47,7 @@ function App(props) {
       },
       dispatch
     )
-  }, [])
+  }, [dispatch])
 
   const citySelectorBacs = useMemo(() => {
     return bindActionCreators(
@@ -52,7 +58,7 @@ function App(props) {
       },
       dispatch
     )
-  }, [])
+  }, [dispatch])
 
   const dateBacs = useMemo(() => {
     return bindActionCreators(
@@ -61,26 +67,44 @@ function App(props) {
       },
       dispatch
     )
-  }, [])
+  }, [dispatch])
 
   const dateSelectorBacs = useMemo(() => {
     return bindActionCreators(
       {
-        onBack:hideDateSelector,
+        onBack:hideDateSelector
       },
       dispatch
     )
-  }, [])
+  }, [dispatch])
+
+  const onDateSelect = useCallback(day => {
+    if(!day || isBeforeNow(day)){
+      return 
+    }
+
+    dispatch(setDepartDate(day))
+    dispatch(hideDateSelector())
+  },[dispatch])
+
+  const highSpeedBacs = useMemo(() => {
+    return bindActionCreators(
+      {
+        toggle:toggleHighSpeed
+      },
+      dispatch
+    )
+  }, [dispatch])
 
   return (
     <div>
       <div className="header-wrapper">
         <Header title="火车票" onBack={onBack} />
       </div>
-      <form className="form">
+      <form action="order.html" className="form">
         <Journey from={from} to={to} {...fromBacs} />
         <DepartDate time={departDate} {...dateBacs} />
-        <HighSpeed />
+        <HighSpeed highSpeed={highSpeed} {...highSpeedBacs}/>
         <Submit />
       </form>
       <CitySelector
@@ -92,6 +116,7 @@ function App(props) {
       <DateSelector
         show={isDepartDateSelectorShow}
         {...dateSelectorBacs}
+        onSelect={onDateSelect}
         />
     </div>
   )

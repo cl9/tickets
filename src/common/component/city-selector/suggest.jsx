@@ -18,7 +18,7 @@ const Suggest = memo(function Suggest(props) {
           setSearchResult(result)
         }
       })
-  }, [])
+  }, [searchKey])
 
   return (
     <div className="city-suggest">
@@ -39,6 +39,9 @@ const Suggest = memo(function Suggest(props) {
   )
 })
 
-Suggest.propTypes = {}
+Suggest.propTypes = {
+    searchKey: PropTypes.string,
+    onSelect: PropTypes.func.isRequired
+}
 
 export default Suggest

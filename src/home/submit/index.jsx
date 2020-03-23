@@ -1,18 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React,{memo} from 'react'
 import './index.css'
 
-function Submit(props) {
+const Submit = memo(function Submit(props) {
   return (
-    <div>
-      
+    <div className="submit">
+      <button type="submit" className="submit-button"> 搜索 </button>
     </div>
   )
-}
-
-Submit.propTypes = {
-
-}
+})
 
 export default Submit
 

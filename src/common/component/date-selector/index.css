@@ -21,15 +21,12 @@
   text-align: left;
 }
 
-.date-table .table-title {
-  text-align: center
-}
-
 .date-table tr,
 .date-table td,
 .date-table th {
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 .date-table thead td {
@@ -37,14 +34,13 @@
   background-color: #fff;
 }
 
-.date-table thead h5 {
+.date-table thead span {
   font-size: 18px;
   line-height: 39px;
   text-align: center;
   font-weight: bold;
   padding: 0;
   margin: 0;
-  border: 1px solid #cdcdcd;
 }
 
 .date-table-weeks {
